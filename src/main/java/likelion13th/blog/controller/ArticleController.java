@@ -1,6 +1,7 @@
 package likelion13th.blog.controller;
 
 import likelion13th.blog.domain.Article;
+import likelion13th.blog.service.ArticleService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,33 +12,30 @@ import java.util.List;
 @RestController
 @RequestMapping("/articles")
 public class ArticleController {
-    private final List<Article> articleDB = new ArrayList<>();
-    private Long nextId = 1L;
 
+    private final ArticleService articleService;
+
+    public ArticleController(ArticleService articleService) {
+        this.articleService = articleService;
+    }
+
+    //게시글 작성
     @PostMapping()
     public ResponseEntity<Article> createdArticle(@RequestBody Article article) {
-
-        //Article 객체 생성
-        Article newArticle = new Article(
-                nextId++,
-                article.getTitle(),
-                article.getContent(),
-                article.getAuthor(),
-                article.getPassword()
-        );
-
-        //DB에 객체 저장
-        articleDB.add(newArticle);
+    Article newArticle = articleService.addArticle(article);
 
         //저장한 객체 반환
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(newArticle);
     }
-    @GetMapping
+
+    @GetMapping()
     public ResponseEntity<List<Article>> getArticle() {
+        List<Article> articles = articleService.findAll();
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(articleDB);
+                .body(articles);
     }
+
 }
