@@ -5,6 +5,8 @@ import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Getter @Setter
 @Builder
@@ -31,5 +33,5 @@ public class Comment {
     private String password;
 
     @Column(nullable = false)
-    private String createdAt;
+    private LocalDateTime createdAt;
 }
