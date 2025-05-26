@@ -24,6 +24,16 @@ public class Article {
     private Long id;
 
     @Column(nullable = false)
+    private int commentCount;
+
+    public void increaseComentCount() {
+        commentCount++;
+    }
+    public void decreaseComentCount() {
+        if(commentCount>0) commentCount--;
+    }
+
+    @Column(nullable = false)
     private String title;
 
     @Column(nullable = false)
