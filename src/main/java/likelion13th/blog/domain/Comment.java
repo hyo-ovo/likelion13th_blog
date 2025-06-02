@@ -8,19 +8,19 @@ import org.hibernate.annotations.OnDeleteAction;
 import java.time.LocalDateTime;
 
 @Entity
-@Getter @Setter
-@Builder
+@Getter
+@Builder @AllArgsConstructor
 @NoArgsConstructor
-@AllArgsConstructor
 public class Comment {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(updatable = false)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="article.id", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "article_id", nullable = false)
+    @OnDelete(action= OnDeleteAction.CASCADE)
     private Article article;
 
     @Column(nullable = false)
@@ -32,6 +32,9 @@ public class Comment {
     @Column(nullable = false)
     private String password;
 
+
     @Column(nullable = false)
     private LocalDateTime createdAt;
+
+
 }

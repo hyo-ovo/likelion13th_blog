@@ -10,8 +10,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
-@Builder
-@AllArgsConstructor
+@Builder @AllArgsConstructor
 public class ArticleDetailResponse {
     private final Long id;
     private final String title;

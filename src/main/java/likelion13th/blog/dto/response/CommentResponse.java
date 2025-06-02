@@ -8,15 +8,13 @@ import lombok.Getter;
 import java.time.LocalDateTime;
 
 @Getter
-@Builder
-@AllArgsConstructor
+@Builder @AllArgsConstructor
 public class CommentResponse {
     private final Long id;
     private final Long articleId;
     private final String content;
     private final String author;
     private final LocalDateTime createdAt;
-
 
     public static CommentResponse of(Comment comment){
         return CommentResponse.builder()
